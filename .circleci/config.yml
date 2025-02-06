@@ -21,6 +21,12 @@ jobs:
       - run:
           name: "Say hello"
           command: "echo Hello, World!"
+    
+    step:
+      - run:
+          name: build dockerfile
+          command: docker build -t node-js-simple:latest
+
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/workflows/ & https://circleci.com/docs/configuration-reference/#workflows
