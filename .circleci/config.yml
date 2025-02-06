@@ -9,15 +9,15 @@ jobs:
       - checkout
 
       - run:
-          name: build dockerfile
+          name: Build Dockerfile
           command: docker build -t node-js-simple:latest .
       
       - run:
-          name: test image
+          name: Lancer le conteneur Docker
           command: docker run -p 8080:8080 -d node-js-simple:latest
       
       - run:
-          name: test
+          name: Tester la connexion au port 8080
           command: curl --silent --head http://localhost:8080 || (echo "Serveur non disponible sur le port 8080" && exit 1)
       
       - run:
