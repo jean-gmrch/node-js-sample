@@ -7,6 +7,6 @@ workflows:
   build-and-publish:
     jobs:
       - docker/publish:
-          image: $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME
+          image: $DOCKER_LOGIN/$CIRCLE_PROJECT_REPONAME
           tag: latest
 
