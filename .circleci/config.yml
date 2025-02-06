@@ -21,8 +21,6 @@ jobs:
       - run:
           name: "Say hello"
           command: "echo Hello, World!"
-    
-    steps:
       - run:
           name: build dockerfile
           command: docker build -t node-js-simple:latest
