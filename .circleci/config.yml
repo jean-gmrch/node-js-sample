@@ -40,7 +40,7 @@ jobs:
           name: Pousser l'image sur Docker Hub
           command: |
             docker tag node-js-simple:latest $DOCKER_USER/node-js-simple:latest
-            docker push $DOCKER_USER/node-js-simple:latest
+            docker push $DOCKER_USERNAME/node-js-simple:latest
 
 
 # Orchestrate jobs using workflows
