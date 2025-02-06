@@ -7,6 +7,6 @@ workflows:
   build-and-publish:
     jobs:
       - docker/publish:
-          image: $DOCKER_LOGIN/node-js-sample
+          image: $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME
           tag: latest
 
