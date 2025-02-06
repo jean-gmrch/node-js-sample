@@ -34,12 +34,12 @@ jobs:
       - run:
           name: Se connecter à Docker Hub
           command: |
-            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
+            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
       
       - run:
           name: Pousser l'image sur Docker Hub
           command: |
-            docker tag node-js-simple:latest $DOCKER_USER/node-js-simple:latest
+            docker tag node-js-simple:latest $DOCKER_USERNAME/node-js-simple:latest
             docker push $DOCKER_USERNAME/node-js-simple:latest
 
 
