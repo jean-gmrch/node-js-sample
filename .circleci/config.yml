@@ -1,37 +1,45 @@
 version: 2.1
 
-jobs:
-  build-and-push:
-    machine:
-      image: ubuntu-2404:2024.11.1
+# jobs:
+#   build-and-push:
+#     machine:
+#       image: ubuntu-2404:2024.11.1
 
-    steps:
-      - checkout
+#     steps:
+#       - checkout
 
-      - run:
-          name: Build Dockerfile
-          command: docker build -t node-js-simple:latest .
+#       - run:
+#           name: Build Dockerfile
+#           command: docker build -t node-js-simple:latest .
       
-      - run:
-          name: Lancer le conteneur Docker
-          command: docker run -p 8080:8080 -d node-js-simple:latest
+#       - run:
+#           name: Lancer le conteneur Docker
+#           command: docker run -p 8080:8080 -d node-js-simple:latest
       
-      - run:
-          name: Tester la connexion au port 8080
-          command: curl --silent --head http://localhost:8080 || (echo "Serveur non disponible sur le port 8080" && exit 1)
+#       - run:
+#           name: Tester la connexion au port 8080
+#           command: curl --silent --head http://localhost:8080 || (echo "Serveur non disponible sur le port 8080" && exit 1)
       
-      - run:
-          name: Se connecter à Docker Hub
-          command: |
-            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+#       - run:
+#           name: Se connecter à Docker Hub
+#           command: |
+#             echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
       
-      - run:
-          name: Pousser l'image sur Docker Hub
-          command: |
-            docker tag node-js-simple:latest $DOCKER_USERNAME/node-js-simple:latest
-            docker push $DOCKER_USERNAME/node-js-simple:latest
+#       - run:
+#           name: Pousser l'image sur Docker Hub
+#           command: |
+#             docker tag node-js-simple:latest $DOCKER_USERNAME/node-js-simple:latest
+#             docker push $DOCKER_USERNAME/node-js-simple:latest
+
+orbs:
+  docker: circleci/docker@2.8.2
 
 workflows:
-  build:
+  build-and-publish:
     jobs:
-      - build-and-push
+      - docker/publish:
+          image: $DOCKER_USERNAME/node-js-sample
+          tag: latest
+          docker-username: DOCKER_USERNAME
+          docker-password: DOCKER_PASSWORD
+
