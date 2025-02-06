@@ -19,16 +19,14 @@ jobs:
       # Checkout the code as the first step.
       - checkout
       - setup_remote_docker
-      - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
+
       - run:
           name: build dockerfile
           command: docker build -t node-js-simple:latest .
       
       - run:
           name: test image
-          command: docker run -p 8080:8080  node-js-simple:latest
+          command: docker run -p 8080:8080 -d node-js-simple:latest
       
       - run:
           name: test
